@@ -13,7 +13,7 @@ let workTime = {
     seconds: 0,
     minutes: 0
 };
-//---------------- Work Time Listener ---------------
+//---------------- Work Time Selector Listener ---------------
 DOMWorkTime.addEventListener('change', (event) => {
     _configWorkTime = event.target.value;
     workTime.minutes = _configWorkTime;
@@ -22,7 +22,7 @@ DOMWorkTime.addEventListener('change', (event) => {
        DOMStartBtn.disabled = false;
     }
 });
-//---------------- Break Time Listener ---------------
+//---------------- Break Time Selector Listener ---------------
 DOMBreakTime.addEventListener('change', (event) => {
     _configBreakTime = event.target.value;
     if(isInt(_configWorkTime)) {
@@ -32,55 +32,72 @@ DOMBreakTime.addEventListener('change', (event) => {
 
 //---------------- Start Counter Listener ---------------
 DOMStartBtn.addEventListener("click", function(event) {
-    if (!DOMWorkTime.disabled){
+    //Disables Selectors, enables reset btn
+    if (!DOMWorkTime.disabled) {
         DOMWorkTime.disabled = true;
         DOMBreakTime.disabled = true;
         DOMResetBtn.disabled = false;
     }
+    //Changes btn text
     updateStartButtonDOM("Pause!")
-    
     appRunning = !appRunning;
     let isWorkTime = true;
+
+    //Initialize count
     let intervalID = setInterval(function () {
-        if (interval === 3){
+        console.log("here")
+        //If last interval ends countdown
+        if (interval === 3) {
             appRunning = false;
-            updateHeaderDOM("Finished! Refresh to Reset.");
+            updateHeaderDOM("Finished! Please click the Reset button");
             DOMStartBtn.disabled = true;
             clearInterval(intervalID);
         }
+
         if(appRunning) {
+            //Reduces seconds
             if (workTime.seconds != 0) {
                 workTime.seconds -= 1;
                 time = `${formatTime(workTime.minutes)}:${formatTime(workTime.seconds)}`;
                 updateTimerDOM(time);
             }
+            //Once minute has passed reduces minutes. Resets seconds
             else if (workTime.seconds <= 0) {
                 workTime.seconds += 59;
                 workTime.minutes -= 1;
                 time = `${formatTime(workTime.minutes)}:${formatTime(workTime.seconds)}`;
                 updateTimerDOM(time);
             }
-
+            //Executes once counter reaches 0
             if (time === "00:00") {
+                //Switches to break counter
                 if (isWorkTime) {
                     workTime.minutes += _configBreakTime;
-                    updateHeaderDOM("Break Time!")
+                    updateHeaderDOM("Break Time!");
                 }
+                //Switches to work counter
                 else {
                     workTime.minutes += _configWorkTime;
                     interval += 1; 
-                    updateHeaderDOM("Work Time!")
-                    document.querySelector(`.interval-${interval}`).style.background = "green";
+                    updateHeaderDOM("Work Time!");
+                    document.querySelector(`.interval-${interval}`).style.background = "#FD5D5D";
                 }
+                //Toggles between work time and break time
                 isWorkTime = !isWorkTime;
             }
-        }else{
-            updateStartButtonDOM("Continue")
+        }
+        //Catches Pause button click. 
+        else{
+            //Condition is needed to check if Pause button was pressed
+            if(document.querySelector("#start-btn").innerHTML === "Pause!" && !appRunning) {
+                updateStartButtonDOM("Continue");
+            }
             clearInterval(intervalID);
         }
-    }, 1);
+    }, 1000);
 });
 
+//Reset button. Reinitializes the app
 DOMResetBtn.addEventListener("click", function(event) {
     _configWorkTime = null;
     _configBreakTime = null;
@@ -126,7 +143,7 @@ function resetIntervalCount() {
     interval = 0;  
     const icons = document.querySelectorAll(".cycle-icon");
     icons.forEach(function(icon) {
-        icon.style.background = "red";
+        icon.style.background = "#FF8080";
     })
 }
 function updateStartButtonDOM(state) {
@@ -134,5 +151,5 @@ function updateStartButtonDOM(state) {
 }
 
 function updateHeaderDOM(task) {
-    document.querySelector(".task-header").innerHTML = `${task}`;
+    document.querySelector(".current-task").innerHTML = `${task}`;
 }

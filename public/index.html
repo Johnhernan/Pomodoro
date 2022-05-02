@@ -4,51 +4,54 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
+        <title>Pomodoro!</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="index.css">
     </head>
     <body>
-        <main>
-            <header>
-                <h1>Pomodoro!</h1>
-                <img>
-                <h4 class="task-header">Work time!</h4>
-            </header>
+        
+        <header>
+            <h1 class="logo">Pomodoro!</h1>
+        </header>
 
-            <div class="work-time-wrapper">
-                <label for="work-time">Work Time: </label>
-                <select class="work-time" name="work-time">
-                    <option value="default">Select one...</option>
-                    <option value="20">20 Minutes</option>
-                    <option value="25">25 Minutes</option>
-                    <option value="30">30 Minutes</option>
-                </select>
-            </div>
+        <div>
+            <h4 class="current-task">Work time!</h4>
+            <h4 class="timer">Select your time</h4>
+        </div>
 
-            <div class="break-time-wrapper">
-                <label for="break-time">Break Time: </label>
-                <select class="break-time" name="break-time">
-                    <option value="default">Select one...</option>
-                    <option value="5">5 Minutes</option>
-                    <option value="10">10 Minutes</option>
-                </select>
-            </div>
+        <div class="selectors">
+            <label for="work-time">Work Time: </label>
+            <select class="work-time" name="work-time">
+                <option value="default">Select one...</option>
+                <option value="20">20 Minutes</option>
+                <option value="25">25 Minutes</option>
+                <option value="30">30 Minutes</option>
+            </select>
+        </div>
 
-            <h6 class="timer">Select a time</h6>
+        <div class="selectors">
+            <label for="break-time">Break Time: </label>
+            <select class="break-time" name="break-time">
+                <option value="default">Select one...</option>
+                <option value="5">5 Minutes</option>
+                <option value="10">10 Minutes</option>
+            </select>
+        </div>
 
-            <div class="button-container row-box">
-                <button id="start-btn" class="btn" disabled>Start!</button>
-                <button id="reset-btn" class="btn" disabled>Reset</button>
-            </div>
 
-            <div class="row-box">
-                <div class="cycle-icon interval-1"></div>
-                <div class="cycle-icon interval-2"></div>
-                <div class="cycle-icon interval-3"></div>
-            </div>
-        </main>
+
+        <div>
+            <button id="start-btn" class="btn" disabled>Start!</button>
+            <button id="reset-btn" class="btn" disabled>Reset</button>
+        </div>
+
+        <div class="icons">
+            <div class="cycle-icon interval-1"></div>
+            <div class="cycle-icon interval-2"></div>
+            <div class="cycle-icon interval-3"></div>
+        </div>
+      
       
         <script src="index.js" async defer></script>
     </body>

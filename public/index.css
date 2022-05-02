@@ -1,15 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Radio+Canada&display=swap');
+
 body { 
-    padding: 0;
+    background: #C0EDA6;
+    width: 100%;
+    min-height: 100vh;
     margin: 0;
     text-align: center;
+    font-family: 'Radio Canada', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+select {
+    background-color: #FFF7BC;
+}
+h1,h2,h3, h4, h5, h6 {
+    margin: 10px;
+}
+.logo {
+    font-size: 5rem;
+    margin: 10px;
+    font-family: 'Dancing Script', cursive;
+    color: #FD5D5D;
+}
+.selectors {
+    padding-bottom: 10px;
+}
+.btn {
+    color: #000;
+    background: #FFF7BC;
+    border: 0px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.icons {
+    display: flex;
 }
 .cycle-icon { 
+    margin: 20px 5px;
     width: 20px;
     height: 20px;
     border-radius: 100%;
-    background: red;
-}
-.row-box {
-    display: flex;
-    
+    background: #FF8080;
 }
